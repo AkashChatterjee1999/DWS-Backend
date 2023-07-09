@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var Logger *LogConfig
+var Logger LogConfig
 
 type LogConfig struct {
 	level       string
@@ -15,7 +15,7 @@ type LogConfig struct {
 }
 
 func InitLogger(printLevelUpto string) {
-	Logger = &LogConfig{
+	Logger = LogConfig{
 		logLevelMap: map[string]int{
 			"info":    0,
 			"warning": 1,
