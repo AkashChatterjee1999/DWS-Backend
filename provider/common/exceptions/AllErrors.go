@@ -29,3 +29,6 @@ var ProjectCreationError = DWSErrorResponse{errorCode: "projectCreationError", d
 var UnexpectedError = DWSErrorResponse{errorCode: "unexpectedError", debugReferenceID: "",
 	errorDescription: "Some unexpected error has occurred",
 }
+var InvalidRequestBody = DWSErrorResponse{errorCode: "invalidRequestBody", debugReferenceID: "",
+	errorDescription: "Request Body passed is invalid, please double check",
+}

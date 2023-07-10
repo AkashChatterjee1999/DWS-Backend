@@ -9,10 +9,10 @@ import (
 type ProjectManagerServiceUsecases interface {
 	GetAllProjects(ctx echo.Context) (response class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse)
 	CreateProject(ctx echo.Context, projectName string, projectDescription string) (
-		response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse)
+		response class.CreateProjectResponse, err *exceptions.DWSErrorResponse)
 	UpdateProject(ctx echo.Context, projectID int, updatedProjectDescription *string, isDeactivated bool, isStarted bool) (
-		response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse)
-	DeleteProject(ctx echo.Context, projectID int) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse)
-	StopProject(ctx echo.Context, projectID int) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse)
-	StartProject(ctx echo.Context, projectID int) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse)
+		response class.UpdateProjectResponse, err *exceptions.DWSErrorResponse)
+	DeleteProject(ctx echo.Context, projectID int) (response class.DeleteProjectResponse, err *exceptions.DWSErrorResponse)
+	StopProject(ctx echo.Context, projectID int) (response class.StopProjectResponse, err *exceptions.DWSErrorResponse)
+	StartProject(ctx echo.Context, projectID int) (response class.StartProjectResponse, err *exceptions.DWSErrorResponse)
 }

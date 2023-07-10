@@ -9,13 +9,13 @@ import (
 func SetTracingDetails(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		c.Set("requestID", uuid.New().String())
-		projectManagerRegex, _ := regexp.Compile("/\\/projects\\//gm")
-		kafkaManagerRegex, _ := regexp.Compile("/\\/kafka\\//gm")
-		logManagerRegex, _ := regexp.Compile("/\\/logs\\//gm")
-		gatewayManagerRegex, _ := regexp.Compile("/\\/gateway\\//gm")
-		redisManagerRegex, _ := regexp.Compile("/\\/redis\\//gm")
-		containerManagerRegex, _ := regexp.Compile("/\\/ecs\\//gm")
-		bucketManagerRegex, _ := regexp.Compile("/\\/bucket\\//gm")
+		projectManagerRegex, _ := regexp.Compile("`/projects/`gm")
+		kafkaManagerRegex, _ := regexp.Compile("`/kafka/`gm")
+		logManagerRegex, _ := regexp.Compile("`/logs/`gm")
+		gatewayManagerRegex, _ := regexp.Compile("`/gateway/`gm")
+		redisManagerRegex, _ := regexp.Compile("`/redis/`gm")
+		containerManagerRegex, _ := regexp.Compile("`/ecs/`gm")
+		bucketManagerRegex, _ := regexp.Compile("`/bucket/`gm")
 		if projectManagerRegex.MatchString(c.Request().RequestURI) {
 			c.Set("serviceName", "Project-Manager")
 		} else if kafkaManagerRegex.MatchString(c.Request().RequestURI) {

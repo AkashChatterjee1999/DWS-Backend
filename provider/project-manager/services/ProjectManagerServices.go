@@ -44,22 +44,30 @@ func (p *ProjectManagerServices) GetAllProjects(ctx echo.Context) (response clas
 	return
 }
 
-func (p *ProjectManagerServices) CreateProject(ctx echo.Context, projectName string, projectDescription string) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse) {
+func (p *ProjectManagerServices) CreateProject(ctx echo.Context, projectName string, projectDescription string) (response class.CreateProjectResponse, err *exceptions.DWSErrorResponse) {
+	hasError := p.repo.CreateProject(ctx, projectName, projectDescription)
+	if hasError != nil {
+		p.logger.Error(ctx, "There is some error occurred in repoLayer", hasError)
+		errResponse := exceptions.UnexpectedError
+		errResponse.UpdateRefID(ctx)
+		return response, &errResponse
+	}
+	response.Status = "success"
+	return response, nil
+}
+
+func (p *ProjectManagerServices) UpdateProject(ctx echo.Context, projectID int, updatedProjectDescription *string, isDeactivated bool, isStarted bool) (response class.UpdateProjectResponse, err *exceptions.DWSErrorResponse) {
 	panic("implement me")
 }
 
-func (p *ProjectManagerServices) UpdateProject(ctx echo.Context, projectID int, updatedProjectDescription *string, isDeactivated bool, isStarted bool) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse) {
+func (p *ProjectManagerServices) DeleteProject(ctx echo.Context, projectID int) (response class.DeleteProjectResponse, err *exceptions.DWSErrorResponse) {
 	panic("implement me")
 }
 
-func (p *ProjectManagerServices) DeleteProject(ctx echo.Context, projectID int) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse) {
+func (p *ProjectManagerServices) StopProject(ctx echo.Context, projectID int) (response class.StopProjectResponse, err *exceptions.DWSErrorResponse) {
 	panic("implement me")
 }
 
-func (p *ProjectManagerServices) StopProject(ctx echo.Context, projectID int) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse) {
-	panic("implement me")
-}
-
-func (p *ProjectManagerServices) StartProject(ctx echo.Context, projectID int) (response *class.GetAllProjectsResponse, err *exceptions.DWSErrorResponse) {
+func (p *ProjectManagerServices) StartProject(ctx echo.Context, projectID int) (response class.StartProjectResponse, err *exceptions.DWSErrorResponse) {
 	panic("implement me")
 }
